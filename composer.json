@@ -1,5 +1,5 @@
 {
-    "name": "nepda/doctrine-encrypt",
+    "name": "lucascardoso-egsys/doctrine-encrypt",
     "type": "library",
     "keywords": ["doctrine", "aes256", "encrypt", "decrypt"],
     "license": "MIT",
@@ -26,6 +26,10 @@
         {
             "name": "Dustin Thomson",
             "email": "dthomson@51systems.com"
+        },
+        {
+            "name": "Lucas Saraiva",
+            "email": "lucassaraiva5@hotmail.com"
         }
     ]
 }
