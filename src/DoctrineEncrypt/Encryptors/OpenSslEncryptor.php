@@ -22,6 +22,8 @@ class OpenSslEncryptor implements EncryptorInterface
 
     private $publicKey;
 
+    private $passPhrase;
+
     /**
      * Initialization of encryptor
      * @param string $key
@@ -31,6 +33,7 @@ class OpenSslEncryptor implements EncryptorInterface
         $this->secretKey = $key;
         $this->privateKey = $key["private"];
         $this->publicKey = $key["public"];
+        $this->passPhrase = $key["pass"];
         $pub_id = openssl_get_publickey($this->publicKey);
         $this->key_len = openssl_pkey_get_details($pub_id)['bits'];
     }
@@ -56,10 +59,11 @@ class OpenSslEncryptor implements EncryptorInterface
         $part_len = $this->key_len / 8;
         $base64_decoded = base64_decode($encrypted);
         $parts = str_split($base64_decoded, $part_len);
+        $privateKey = openssl_get_privatekey($this->privateKey,$this->passPhrase);
 
         foreach ($parts as $part) {
             $decrypted_temp = '';
-            openssl_private_decrypt($part, $decrypted_temp,$this->privateKey);
+            openssl_private_decrypt($part, $decrypted_temp, $privateKey);
             $decrypted .= $decrypted_temp;
         }
 
