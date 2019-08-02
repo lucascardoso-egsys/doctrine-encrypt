@@ -46,6 +46,8 @@ class OpenSslEncryptor implements EncryptorInterface
             openssl_public_encrypt($part, $encrypted_temp, $this->publicKey);
             $encrypted .= $encrypted_temp;
         }
+
+        return base64_encode($encrypted);
     }
 
     public function decrypt($encrypted)
